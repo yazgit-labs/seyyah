@@ -22,10 +22,10 @@
    ------------general variables--
 */
 //motor controller pin setup
-const int leftForwardPin = 0;
-const int leftBackwardPin = 1;
-const int rightForwardPin = 3;
-const int rightBackwardPin = 2;
+const int leftForwardPin = 1;
+const int leftBackwardPin = 0;
+const int rightForwardPin = 2;
+const int rightBackwardPin = 3;
 const int leftMotorPwm = 19;
 const int rightMotorPwm = 18;
 //encoder pin setup
