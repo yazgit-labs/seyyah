@@ -31,8 +31,8 @@ const int rightMotorPwm = 18;
 //encoder pin setup
 const int encoderLA = 7;
 const int encoderLB = 6;
-const int encoderRA = 4;
-const int encoderRB = 5;
+const int encoderRA = 5;
+const int encoderRB = 4;
 //bno055 setup
 Adafruit_BNO055 bno = Adafruit_BNO055(55);
 imu::Vector<3> gyro;
@@ -49,10 +49,11 @@ Encoder leftEncoder(LEFT);
 Encoder rightEncoder(RIGHT);
 Odometer odom;
 // robots physical values
-const double radius_of_wheels = 2.95;      //r(cm)
-const double wide_length = 14.9;          //l(cm)
+const double radius_of_wheels = 2.96;      //r(cm)
+const double wide_length = 13.6;          //l(cm)
 const float motor_one_turn_tick = 297.0;  
-const float perimeter_of_wheels = 0.161;  //(m)
+const float perimeter_of_wheels = 0.186;  //(m)  0.161
+const float max_velocity = 0.5;           //(m/s)
 
 /*
     ---------function declerations--
@@ -214,8 +215,8 @@ void cmd_vel_handle( const geometry_msgs::Twist& msg){
   turn_message = msg.angular.z;
   right_cmd_vel = (((2.0 * fwd_message)+(turn_message * wide_length)) / (2.0 * radius_of_wheels));
   left_cmd_vel = (((2.0 * fwd_message)-(turn_message * wide_length)) / (2.0 * radius_of_wheels));
-  mapped_right_vel = int(map_func(absoluteValue(right_cmd_vel) , 0 , 1.2 , 20 , 255));
-  mapped_left_vel = int(map_func(absoluteValue(left_cmd_vel) , 0 , 1.2 , 20 , 255));
+  mapped_right_vel = int(map_func(absoluteValue(right_cmd_vel) , 0 , max_velocity , 20 , 255));
+  mapped_left_vel = int(map_func(absoluteValue(left_cmd_vel) , 0 , max_velocity , 20 , 255)+4);
   
   if (right_cmd_vel >= 0){
     digitalWrite(rightForwardPin,HIGH);
@@ -246,7 +247,7 @@ void cmd_vel_handle( const geometry_msgs::Twist& msg){
   if(mapped_left_vel > 255){
     analogWrite(leftMotorPwm,255);
   }
-  else if(mapped_left_vel < 25){
+  else if(mapped_left_vel < 29){
     analogWrite(leftMotorPwm,0);
   }
   else{
@@ -263,28 +264,28 @@ void fix_velocities(){
   left_enc_vel  = (absoluteValue(((left_enc_pos -left_enc_old_pos)  / motor_one_turn_tick) * perimeter_of_wheels)/(enc_velfix_time_now-enc_velfix_time_old))*1000;// multiplied with 1000 for turning m/ms to m/s
   right_enc_old_pos = right_enc_pos;
   left_enc_old_pos = left_enc_pos;
-  enc_velfix_time_old = enc_velfix_time_now;
+  enc_velfix_time_old = enc_velfix_time_now;             
   if (mapped_right_vel != 255){ //if it is 255 we can not increase anymore
-    if (right_cmd_vel - right_enc_vel > 0.1){
-      mapped_right_vel += (right_cmd_vel - right_enc_vel)*10;
+    if (absoluteValue(right_cmd_vel) - right_enc_vel > 0.1){           
+      mapped_right_vel += (absoluteValue(right_cmd_vel) - right_enc_vel)*10;
       if (mapped_right_vel > 255){mapped_right_vel = 255;}
       analogWrite(rightMotorPwm,mapped_right_vel);
     }
   }
-  if (right_enc_vel - right_cmd_vel > 0.1){
-    mapped_right_vel -= (right_enc_vel - right_cmd_vel)*10;
+  if (right_enc_vel - absoluteValue(right_cmd_vel) > 0.1){  
+    mapped_right_vel -= (right_enc_vel - absoluteValue(right_cmd_vel))*10;
       if (mapped_right_vel < 0){mapped_right_vel = 0;}
       analogWrite(rightMotorPwm,mapped_right_vel);
   }
   if (mapped_left_vel != 255){  //if it is 255 we can not increase anymore
-    if (left_cmd_vel - left_enc_vel > 0.1){
-      mapped_left_vel += (left_cmd_vel - left_enc_vel)*10;
+    if (absoluteValue(left_cmd_vel) - left_enc_vel > 0.1){
+      mapped_left_vel += (absoluteValue(left_cmd_vel) - left_enc_vel)*10;
       if (mapped_left_vel > 255){mapped_left_vel = 255;}
       analogWrite(leftMotorPwm,mapped_left_vel);
     }
   }
-  if (left_enc_vel - left_cmd_vel > 0.1){
-    mapped_left_vel -= (left_enc_vel - left_cmd_vel)*10;
+  if (left_enc_vel - absoluteValue(left_cmd_vel) > 0.1){
+    mapped_left_vel -= (left_enc_vel - absoluteValue(left_cmd_vel))*10;
       if (mapped_left_vel < 0){mapped_left_vel = 0;}
       analogWrite(leftMotorPwm,mapped_left_vel);
   }
