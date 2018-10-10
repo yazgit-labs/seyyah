@@ -1,2 +1,0 @@
-Labirenti bulan algoritmaya close işlemini uygula
-20 saniye beklemek yerine map_server'dan gelecek olan mesaj beklenebilir

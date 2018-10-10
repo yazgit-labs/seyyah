@@ -1,7 +1,0 @@
-<launch>
-  <arg name="robot_name" value="seyyah"/>
-  <node name="seyyah_keyboard_teleop" pkg="ika_teleop" type="keyboard_teleop.py" respawn="false" output="screen">
-    <param name="topic" type="string" value"seyyah/cmd_vel">
-  <node/>
-
-</launch>

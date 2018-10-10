@@ -1,3 +1,0 @@
-First run "GoPro_calib_web_3.0.py" code (not just for GoPro cam) it is going to create 20 images or so
-Then run "fisheye_calibration.py" it will use those images to calibrate camera
-ru the "fisheye_undistortion.py" to control whether your calibration values are true or not

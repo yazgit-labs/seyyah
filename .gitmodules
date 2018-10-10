@@ -1,0 +1,3 @@
+[submodule "hector"]
+	path = hector
+	url = https://github.com/rootofarch/hector
