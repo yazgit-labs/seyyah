@@ -1,0 +1,29 @@
+1. İhanın kalkış ve inişi ros ile nasıl yazılacak, ilk kalkış konumunu bilmiyor.
+2. İKAnın odom verisini tekerleklerden almaya çalış
+3. İKA yeşil noktayı dışarıdan başlayarak kendisi bulacak. Bu noktada ihanın ikayı kadraja alabilmesi için İKA'nın yakın olduğu duvar kameranın yatay ekseninde kalmalıdır. 
+4. Duvarların etrafını saran dğikdörtgenden duvarların koordinatlarını bulup yeşilin uzak olduğu bütün delikleri kapatabiliriz.
+ kontürleme ile doğru dikdörtgeni bulduğumuzdan emin olamız lazım.
+    Bunu yapmak için de tekrar çözünülük değerini kullanrak labirentin yaklaşık boyutuna en yakın dikdörtgeni bulabiliriz.
+    Kontür işlemlerine iyice çalışmak gerekebilir.
+
+Labirentin altındaki beyaz düzlemi 12x12ye çevirmek gerekebilir
+gerçek zamanlı görüntü işleme algoritmasında eşiği 70-80 civarına çekmek gerekebilir
+
+
+Labirentin duvar koordinatlarını kullanarak yeşil noktaya yakın yerler hariç labirentin etrafı sarılacak
+iha kalkış yerini mavi bir nokta ile işaretleyip(Görüntünün tam ortasından) , iha hareket ettikçe mavi nokta da görüntü ekranındaki pikseller üzerinde ters yöne hareket edecek
+
+
+İhanın hareketinde rostime kullanılabilir.
+
+Sürekli en son gözlemlenen rostime değeri bir yerde tutulur, ardından güncel rostime değerinden bu değer çıkarılarak iki hız komutu arasındaki zaman aralığı bulunur.
+Örn: Saniyede bir ihanın hız topicine üye olan fonksiyondan hız değeri alınır (5 saniyede bir de olabilir) bu bir saniyelik süre içerisindeki ortalama hız bulunur. 
+Bulunan ortalama hız geçen zaman ile çarpılarak alınan yol bulunur. Ardında bu yol resolution sabiti ile çarpılarak piksel cinsinden yazılır ve başta işaretlenen mavi nokta 
+bu miktar kadar ters yönde hareket ettirilir. 
+Bu aşamada eğer iha yönünü ikaya göre konumlandırmaya programlanmış ise kamera görüntüsü dönecek ve işaretlenen mavi nokta da kameranın orta noktası etrafında ters yönde döndürülerek
+bu etki nötrlenmiş olur. (Geometride noktayı nokta etrafında döndürmeye bak)
+
+İHA'nın yönünü sabit tutma ve yönünü İKAdan gelen imu verisine göre belirleme ihtimallerini hüseyin ve Behçete sor.
+
+
+

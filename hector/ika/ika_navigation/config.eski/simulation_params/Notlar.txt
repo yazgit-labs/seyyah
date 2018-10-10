@@ -1,0 +1,24 @@
+Costmap_common_params:
+cost_scaling_factor 
+
+DWA Loca Planner:
+path_distance_bias: Ne anlama geldiğini biliyorum, genelde 32 veya 64 yapıyorlar hangi değerler arasında değişiyor bilmiyorum
+goal_distance_bias: Aynı şekilde genelde 20 civarında yapıyorlar
+
+Global_costmap_params:
+transform_tolerance
+
+Global Planner:
+publish_scale
+lethal_cost
+
+AMCL:
+kld_err
+odom_alpha1,2,3,4
+laser_z_hit
+laser_z_short
+laser_z_max
+laser_z_rand
+laser_sigma_hit
+laser_lambda_short
+laser_likelihood_max_dist

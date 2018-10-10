@@ -1,0 +1,11 @@
+local_costmap:
+  global_frame: /odom
+  robot_base_frame: /base_footprint
+  update_frequency: 10.0
+  publish_frequency: 10.0
+  transform_tolerance: 0.5 
+  static_map: false
+  rolling_window: true
+  width: 2.0
+  height: 2.0
+  resolution: 0.005203814 # This value is better to be equal to resolution value of static map

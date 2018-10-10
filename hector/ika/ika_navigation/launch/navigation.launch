@@ -1,0 +1,29 @@
+<launch>
+  <arg name="robot_name" default="seyyah" />
+  <param name="robot_name" value="$(arg robot_name)" />
+
+<node pkg="tf" type="static_transform_publisher" name="odom_to_map"
+    args="0 0 0 0 0 0  /map seyyah/odom 100" />
+<!--
+  <group ns="$(arg robot_name)">  
+  -->
+<!-- map server -->
+  <arg name="map_file" default="$(find hector_ika)/maps/labMap.yaml" />  
+  <node pkg="map_server" type="map_server" name="map_loader"
+    args="$(arg map_file)">
+    <param name="frame_id" value="/map" />
+  </node>
+  
+  <!-- amcl -->
+    <include file="$(find ika_navigation)/launch/include/amcl.launch.xml"/>
+
+    <!-- move_Base -->
+    <include file="$(find ika_navigation)/launch/include/move_base.launch.xml">
+      <arg name="robot_name" value="$(arg robot_name)"/>
+    </include>
+
+  <!--
+  </group>
+  -->
+
+</launch>

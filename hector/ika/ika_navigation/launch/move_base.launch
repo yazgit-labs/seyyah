@@ -1,0 +1,15 @@
+<launch>
+
+  <arg name="robot_name" default="$(env ROBOT_NAME)" />
+  
+  <group ns="$(arg robot_name)">
+
+    <include file="$(find ika_navigation)/launch/include/move_base.launch.xml">
+      <arg name="robot_name" value="$(arg robot_name)"/>
+    </include>
+
+
+  </group>
+
+
+</launch>

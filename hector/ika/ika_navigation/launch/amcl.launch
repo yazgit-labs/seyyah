@@ -1,0 +1,11 @@
+<launch>
+  <arg name="robot_name" default="$(env ROBOT_NAME)" />
+  <param name="robot_name" value="$(arg robot_name)" />
+
+  <group ns="$(arg robot_name)">
+    <include file="$(find ika_navigation)/launch/include/amcl.launch.xml">
+      <arg name="robot_name" value="$(arg robot_name)" />
+    </include>
+  </group>
+
+</launch>
