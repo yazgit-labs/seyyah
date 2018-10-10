@@ -6,9 +6,6 @@
   <group ns="$(arg robot_name)">
     <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_base_link"
       args="0.0 0.0 0.0 0.0 0.0 0.0 $(arg robot_name)/base_footprint $(arg robot_name)/base_link 200"/>
-    <!--node pkg="tf" type="static_transform_publisher" name="base_link_to_laser"
-      args="0.0 0.0 0.3 -3.141592654 0.0 0.0 $(arg robot_name)/base_link /laser 200"/-->
-
   </group>
 
 </launch>
