@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="joy_dev" default="/dev/input/js0" />
+  <arg name="robot_name" value="seyyah"/>
+
+  <include file="$(find seyyah)/launch/bringup.launch">
+      <arg name="robot_name" default="$(arg robot_name)"/>
+  </include>
+  
+  <!-- Joy node -->
+  <node respawn="true" pkg="joy" type="joy_node" name="seyyah_joy" >
+    <param name="dev" type="string" value="$(arg joy_dev)" />
+    <param name="deadzone" value="0.12" />
+  </node>
+
+  <!--seyyah Joy Node-->
+  <node pkg="seyyah" name="Seyyah_joystick" type="seyyah_joy.py" output="screen"></node>
+</launch>

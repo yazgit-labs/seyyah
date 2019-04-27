@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="robot_name" value="seyyah"/>
+
+  <include file="$(find seyyah)/launch/bringup.launch">
+    <arg name="robot_name" default="$(arg robot_name)"/>
+  </include>
+  
+  <node name="seyyah_keyboard_teleop" pkg="seyyah" type="seyyah_keyboard_teleop.py" respawn="true" output="screen">
+    <param name="topic" type="string" value="/seyyah/cmd_vel" />
+  </node>
+</launch>

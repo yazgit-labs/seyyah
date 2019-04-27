@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="robot_name" default="seyyah" />
+  <arg name="device" default="/dev/ttyACM0" />
+
+  <group ns="$(arg robot_name)">
+    <node pkg="rosserial_python" type="serial_node.py" name="rosserial_python" args="$(arg device)" />
+    <node pkg="seyyah" type="seyyah_odom_publisher" name="odom_publisher" args="$(arg robot_name)" />
+  </group>
+</launch>
