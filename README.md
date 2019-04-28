@@ -1,6 +1,6 @@
 # SEYYAH- Mobile Crawler Robot Platform for Robotic Research
 
-SEYYAH is a **ROS** based **mobile crawler robot** designed by **Ankara University Artificial Intelligence and Image Processing Labs (TR: YAZGİT labs)** to use in academical projects. It is a robot with a *360° laser range scanner*, a *camera*, *two wifi card*(to connect multiple networks at a time), *nvidia jetson tx2* power, *internal battery*. It also has an oled display that shows the current status and a led display that shows voltage status to make its developers job easier.
+SEYYAH is a **ROS** based **mobile crawler robot** designed by **Ankara University Artificial Intelligence and Image Processing Labs (TR: YAZGİT labs)** to use in academical projects. It is a robot with a *360° laser range scanner*, a *camera*, *two wifi card*(to connect multiple networks at a time), *nvidia jetson tx2* power, *internal battery*. It also has an oled display that shows the current status and a led display that shows voltage status to make developers job easier.
 
 ![Seyyah Front Image](img/seyyah.JPG)
 ![Seyyah Rear Image](img/seyyah2.JPG)
