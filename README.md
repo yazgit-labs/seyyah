@@ -45,5 +45,5 @@ roslaunch seyyah bringup.launch
 
 #
 
-> **Note:** Details and more will be added.
+> **Note:** Details and more will be added as soon as possible.
 
